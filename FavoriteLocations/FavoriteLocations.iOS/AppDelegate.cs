@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace FavoriteLocations.iOS
@@ -23,7 +20,8 @@ namespace FavoriteLocations.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            Firebase.Core.App.Configure();
+            
             return base.FinishedLaunching(app, options);
         }
     }
