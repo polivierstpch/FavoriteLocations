@@ -3,6 +3,82 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FavoriteLocations.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BgPrimary">#222</Color>
+            <Color x:Key="Primary">#FFB81C</Color>
+            <Color x:Key="PrimaryDarker">#EBA000</Color>
+            <Color x:Key="TextLight">#FFF</Color>
+            <Color x:Key="TextDark">#222</Color>
+            
+            <Style TargetType="Page" 
+                   ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource BgPrimary}" />
+            </Style>
+            
+            <Style TargetType="NavigationPage" 
+                   ApplyToDerivedTypes="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="{StaticResource TextDark}" />
+            </Style>
+            
+            <Style TargetType="TabbedPage" 
+                   ApplyToDerivedTypes="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDarker}" />
+                <Setter Property="BarTextColor" Value="{StaticResource TextDark}" />
+            </Style>
+            
+            <Style TargetType="StackLayout">
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="Spacing" Value="10" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
 
+            <Style TargetType="Label" 
+                   x:Key="BaseLabel">
+                <Setter Property="TextColor" Value="{StaticResource TextLight}" />
+            </Style>
+            
+            <Style TargetType="Label" 
+                   BasedOn="{StaticResource BaseLabel}" /> 
+            
+            <Style TargetType="Label"
+                   BasedOn="{StaticResource BaseLabel}" 
+                   x:Key="Title">
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="TextTransform" Value="Uppercase" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Padding" Value="0, 0, 0, 30" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            
+            <Style TargetType="Label"
+                   BasedOn="{StaticResource BaseLabel}"
+                   x:Key="EntryLabel">
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+            </Style>
+            
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource TextLight}" />
+                <Setter Property="Margin" Value="0, 0, 0, 5" />
+            </Style>
+            
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"  />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0, 10" />
+            </Style>
+            
+            <Style TargetType="Button" x:Key="InversedButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

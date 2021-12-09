@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using FavoriteLocations.Services;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -10,7 +11,9 @@ namespace FavoriteLocations
         public App()
         {
             InitializeComponent();
-
+            
+            DependencyService.Register<IAlertService, AlertService>();
+            
             MainPage = new NavigationPage(new LoginView());
         }
 

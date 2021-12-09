@@ -1,14 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:FavoriteLocations"
-             x:Class="FavoriteLocations.LoginView">
-
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+             xmlns:vm="clr-namespace:FavoriteLocations.ViewModels;assembly=FavoriteLocations"
+             x:Class="FavoriteLocations.LoginView"
+             NavigationPage.HasNavigationBar="False">
+       
+       <ContentPage.BindingContext>
+              <vm:LoginViewModel />
+       </ContentPage.BindingContext>
+       
+       <StackLayout>
+               <Label Text="Lieux Préférés"
+                      Style="{StaticResource Title}"/>
+               <Label Text="Adresse courriel"
+                      Style="{StaticResource EntryLabel}" />
+               <Entry Placeholder="nom@domaine.com" 
+                      Keyboard="Email"
+                      Text="{Binding Email, Mode=TwoWay}"/>
+               <Label Text="Mot de passe"
+                      Style="{StaticResource EntryLabel}" />
+               <Entry Placeholder="nom@domaine.com" 
+                      IsPassword="True" 
+                      Text="{Binding Password, Mode=TwoWay}"/>
+               <Button Text="Se connecter" 
+                       Command="{Binding LoginCommand}"/>
+               <Button Text="Nouveau compte" 
+                       Style="{StaticResource InversedButton}"
+                       Command="{Binding GoToCreateAccountCommand}"/>
+       </StackLayout>
 
 </ContentPage>
