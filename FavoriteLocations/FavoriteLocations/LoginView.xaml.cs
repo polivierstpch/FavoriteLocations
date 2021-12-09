@@ -2,9 +2,9 @@
 
 namespace FavoriteLocations
 {
-    public partial class MainPage : ContentPage
+    public partial class LoginView : ContentPage
     {
-        public MainPage()
+        public LoginView()
         {
             InitializeComponent();
         }

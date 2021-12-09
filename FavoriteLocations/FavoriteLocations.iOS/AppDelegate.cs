@@ -1,5 +1,8 @@
-﻿using Foundation;
+﻿using FavoriteLocations.iOS.Services;
+using FavoriteLocations.Services;
+using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace FavoriteLocations.iOS
 {
@@ -21,6 +24,8 @@ namespace FavoriteLocations.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             Firebase.Core.App.Configure();
+            
+            DependencyService.Register<IAuthService, FirebaseAuthService>();
             
             return base.FinishedLaunching(app, options);
         }

@@ -11,7 +11,7 @@ namespace FavoriteLocations
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new LoginView());
         }
 
         protected override void OnStart()
