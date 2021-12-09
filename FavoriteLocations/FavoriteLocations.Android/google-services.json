@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "224161003861",
+    "project_id": "favoritelocations-77b32",
+    "storage_bucket": "favoritelocations-77b32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224161003861:android:93f5edd2973c966b5597dc",
+        "android_client_info": {
+          "package_name": "com.companyname.FavoriteLocations"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224161003861-0fuhn6b901k0d2ncerq3n5k54bf1c4k3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvqT2Nyir_bUaExln8JCYLCzCobPS4E2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224161003861-0fuhn6b901k0d2ncerq3n5k54bf1c4k3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "224161003861-mvu13hvm5bq5hurpdkiuu6k7bkn7p5kh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.companyname.FavoriteLocations"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

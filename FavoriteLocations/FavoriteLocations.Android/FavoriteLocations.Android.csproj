@@ -46,6 +46,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="Xamarin.Firebase.Auth" Version="121.0.1.3" />
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />
     </ItemGroup>
     <ItemGroup>
@@ -69,6 +70,9 @@
             <Project>{AB65A9B4-B6FC-4175-845B-92A68A4E1CA5}</Project>
             <Name>FavoriteLocations</Name>
         </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <GoogleServicesJson Include="google-services.json" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
