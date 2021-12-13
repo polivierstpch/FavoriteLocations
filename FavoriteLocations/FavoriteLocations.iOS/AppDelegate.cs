@@ -1,4 +1,6 @@
-﻿using FavoriteLocations.iOS.Services;
+﻿using System;
+using System.IO;
+using FavoriteLocations.iOS.Services;
 using FavoriteLocations.Services;
 using Foundation;
 using UIKit;
@@ -22,11 +24,17 @@ namespace FavoriteLocations.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
             Firebase.Core.App.Configure();
             
+            var dbFileName = "favorite_locations.db";
+            var directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..",
+                "Library");
+            var fullPath = Path.Combine(directory, dbFileName);
+                
             DependencyService.Register<IAuthService, FirebaseAuthService>();
-            
+                
+            LoadApplication(new App(fullPath));
+
             return base.FinishedLaunching(app, options);
         }
     }

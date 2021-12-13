@@ -1,4 +1,6 @@
-﻿using FavoriteLocations.Services;
+﻿using FavoriteLocations.Models;
+using FavoriteLocations.Services;
+using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,11 +10,27 @@ namespace FavoriteLocations
 {
     public partial class App : Application
     {
+
+        public static string DbPath;
+        
         public App()
         {
             InitializeComponent();
             
             DependencyService.Register<IAlertService, AlertService>();
+            
+            
+        }
+
+        public App(string dbPath) : this()
+        {
+            DbPath = dbPath;
+
+            using (var conn = new SQLiteConnection(DbPath))
+            {
+                conn.CreateTable<FavoriteLocation>();
+                conn.CreateTable<Configuration>();
+            }
             
             MainPage = new NavigationPage(new LoginView());
         }
