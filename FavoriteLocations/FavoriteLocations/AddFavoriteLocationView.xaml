@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FavoriteLocations.ViewModels;assembly=FavoriteLocations"
+             x:Class="FavoriteLocations.AddFavoriteLocationView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AddFavoriteLocationViewModel x:Key="Vm" />
+            <Style TargetType="Label"
+                   BasedOn="{StaticResource Title}"
+                   x:Key="AddTitle">
+                <Setter Property="Padding" Value="10" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout BindingContext="{StaticResource Vm}">
+            <Label Style="{StaticResource AddTitle}"
+                   Text="Nouveau Lieu" />
+            <Label Style="{StaticResource EntryLabel}"
+                   Text="Nom" />
+            <Entry Placeholder="Nom"
+                   Text="{Binding Name}" />
+            <Label Style="{StaticResource EntryLabel}"
+                   Text="Adresse" />
+            <Entry Placeholder="Adresse"
+                   Text="{Binding Address}" />
+            <Label Style="{StaticResource EntryLabel}"
+                   Text="Catégorie" />
+            <Picker ItemsSource="{Binding Categories}"
+                    ItemDisplayBinding="{Binding Text}"
+                    SelectedItem="{Binding SelectedCategory}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="1.8*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource EntryLabel}"
+                       Text="Latitude" />
+                <Entry Grid.Row="1"
+                       Grid.Column="0"
+                       Placeholder="Latitude"
+                       Text="{Binding Latitude}"
+                       Keyboard="Numeric" />
+                <Label Grid.Row="0" Grid.Column="1"
+                       Style="{StaticResource EntryLabel}"
+                       Text="Longitude" />
+                <Entry Grid.Row="1"
+                       Grid.Column="1"
+                       Placeholder="Longitude"
+                       Text="{Binding Longitude}"
+                       Keyboard="Numeric" />
+            </Grid>
+            <Label Style="{StaticResource InfoLabel}"
+                   Text="* Entrez des valeurs entre -90 et 90 pour les coordonnées." />
+            <Button Text="Enregistrer"
+                    Command="{Binding RegisterCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

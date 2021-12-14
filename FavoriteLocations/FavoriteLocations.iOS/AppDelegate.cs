@@ -24,6 +24,7 @@ namespace FavoriteLocations.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Xamarin.FormsMaps.Init();
             Firebase.Core.App.Configure();
             
             var dbFileName = "favorite_locations.db";

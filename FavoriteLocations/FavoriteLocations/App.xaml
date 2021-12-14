@@ -1,32 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FavoriteLocations.App">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="BgPrimary">#222</Color>
+            <Color x:Key="BgPrimaryLighter">#333</Color>
+            <Color x:Key="PrimaryLighter">#FFCF66</Color>
             <Color x:Key="Primary">#FFB81C</Color>
-            <Color x:Key="PrimaryDarker">#EBA000</Color>
+            <Color x:Key="PrimaryDarker">#EAA100</Color>
+            <Color x:Key="PrimaryDarker2">#c58700</Color>
+            <Color x:Key="PrimaryDarker3">#8D6100</Color>
             <Color x:Key="TextLight">#FFF</Color>
             <Color x:Key="TextDark">#222</Color>
-            
-            <Style TargetType="Page" 
+            <Color x:Key="PlaceholderLight">#B95</Color>
+
+            <Style TargetType="Page"
                    ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="{StaticResource BgPrimary}" />
             </Style>
-            
-            <Style TargetType="NavigationPage" 
-                   ApplyToDerivedTypes="True">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="BarTextColor" Value="{StaticResource TextDark}" />
-            </Style>
-            
-            <Style TargetType="TabbedPage" 
+
+            <Style TargetType="NavigationPage"
                    ApplyToDerivedTypes="True">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDarker}" />
                 <Setter Property="BarTextColor" Value="{StaticResource TextDark}" />
             </Style>
-            
+
+            <Style TargetType="TabbedPage"
+                   ApplyToDerivedTypes="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="{StaticResource TextDark}" />
+            </Style>
+
             <Style TargetType="StackLayout">
                 <Setter Property="Padding" Value="20" />
                 <Setter Property="Spacing" Value="10" />
@@ -34,16 +40,42 @@
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
             </Style>
 
-            <Style TargetType="Label" 
+            <Style TargetType="Grid" ApplyToDerivedTypes="True">
+                <Setter Property="ColumnSpacing" Value="20" />
+                <Setter Property="RowSpacing" Value="3" />
+            </Style>
+
+            <Style TargetType="Grid" x:Key="CellGrid">
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="{StaticResource PrimaryDarker3}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            
+            <Style TargetType="Grid" x:Key="ConfigGrid">
+                <Setter Property="RowSpacing" Value="20" />
+            </Style>
+
+            <Style TargetType="Label"
                    x:Key="BaseLabel">
                 <Setter Property="TextColor" Value="{StaticResource TextLight}" />
             </Style>
-            
-            <Style TargetType="Label" 
-                   BasedOn="{StaticResource BaseLabel}" /> 
-            
+
             <Style TargetType="Label"
-                   BasedOn="{StaticResource BaseLabel}" 
+                   BasedOn="{StaticResource BaseLabel}" />
+
+            <Style TargetType="Label"
+                   BasedOn="{StaticResource BaseLabel}"
                    x:Key="Title">
                 <Setter Property="FontSize" Value="40" />
                 <Setter Property="TextTransform" Value="Uppercase" />
@@ -52,7 +84,7 @@
                 <Setter Property="Padding" Value="0, 0, 0, 30" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
-            
+
             <Style TargetType="Label"
                    BasedOn="{StaticResource BaseLabel}"
                    x:Key="EntryLabel">
@@ -61,23 +93,105 @@
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
             </Style>
             
+            <Style TargetType="Label"
+                   BasedOn="{StaticResource EntryLabel}"
+                   x:Key="ConfigLabel">
+                <Setter Property="TextColor" Value="{StaticResource TextLight}" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="InfoLabel">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+            </Style>
+            
+            <Style TargetType="Label" 
+                   BasedOn="{StaticResource InfoLabel}"
+                   x:Key="Subtitle">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextTransform" Value="Uppercase" />
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Padding" Value="0, 25" />
+            </Style>
+
             <Style TargetType="Entry">
-                <Setter Property="BackgroundColor" Value="{StaticResource TextLight}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource BgPrimaryLighter}" />
+                <Setter Property="TextColor" Value="{StaticResource TextLight}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderLight}" />
                 <Setter Property="Margin" Value="0, 0, 0, 5" />
             </Style>
-            
+
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="{StaticResource BgPrimaryLighter}" />
+                <Setter Property="TextColor" Value="{StaticResource TextLight}" />
+                <Setter Property="Margin" Value="0, 0, 0, 5" />
+            </Style>
+
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"  />
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Margin" Value="0, 10" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource TextDark}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource TextDark}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDarker3}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
             </Style>
-            
-            <Style TargetType="Button" x:Key="InversedButton">
+        
+            <Style TargetType="Button" x:Key="InvertedButton">
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                <Setter Property="BorderColor" Value="{StaticResource Primary}" />
                 <Setter Property="BorderWidth" Value="1" />
                 <Setter Property="Margin" Value="0" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource PrimaryDarker2}" />
+                                    <Setter Property="BorderColor" Value="{StaticResource PrimaryDarker2}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Focused">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource PrimaryDarker2}" />
+                                    <Setter Property="BorderColor" Value="{StaticResource PrimaryDarker2}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="{StaticResource PrimaryDarker3}" />
+                                    <Setter Property="BorderColor" Value="{StaticResource PrimaryDarker3}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="CollectionView">
+                <Setter Property="BackgroundColor" Value="{StaticResource BgPrimaryLighter}" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Margin" Value="0, 0, 0, 6" />
+                <Setter Property="HeightRequest" Value="400"></Setter>
+                <Setter Property="ItemSizingStrategy" Value="MeasureFirstItem" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

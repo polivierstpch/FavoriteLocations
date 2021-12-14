@@ -11,7 +11,7 @@ namespace FavoriteLocations.Models
     
     public class FavoriteLocation
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         public string UserIdentifier { get; set; }

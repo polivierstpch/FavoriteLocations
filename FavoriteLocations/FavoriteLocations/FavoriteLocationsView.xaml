@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FavoriteLocations.ViewModels;assembly=FavoriteLocations"
+             x:Class="FavoriteLocations.FavoriteLocationsView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:FavoriteLocationsViewModel x:Key="Vm" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Ajouter Nouveau Lieu"
+                     Command="{Binding Source={StaticResource Vm}, Path=GoToAddLocationCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout BindingContext="{StaticResource Vm}">
+            <CollectionView ItemsSource="{Binding Locations }"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedLocation}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Style="{StaticResource CellGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0"
+                                   Style="{StaticResource EntryLabel}"
+                                   Text="{Binding Name}" />
+                            <Label Grid.Row="1"
+                                   Text="{Binding Address}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button
+                Style="{StaticResource InvertedButton}"
+                Text="Voir sur la carte"
+                Command="{Binding GoToLocationOnMapCommand}">
+            </Button>
+            <Button
+                Style="{StaticResource InvertedButton}"
+                Text="Modifier"
+                Command="{Binding ModifyLocationCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
