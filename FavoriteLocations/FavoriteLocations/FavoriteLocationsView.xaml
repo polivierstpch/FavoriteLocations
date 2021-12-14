@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:FavoriteLocations.Controls;assembly=FavoriteLocations"
+             x:Class="FavoriteLocations.FavoriteLocationsView">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Ajouter Nouveau Lieu" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="Test 1" />
+                            <Label Grid.Row="1" Text="Test 2" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button
+                Style="{StaticResource InvertedButton}"
+                Text="Voir sur la carte"
+                IsEnabled="False">
+            </Button>
+            <Button
+                Style="{StaticResource InvertedButton}"
+                Text="Modifier"
+                IsEnabled="True"/>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

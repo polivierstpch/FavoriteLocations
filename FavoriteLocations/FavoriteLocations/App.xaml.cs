@@ -18,8 +18,6 @@ namespace FavoriteLocations
             InitializeComponent();
             
             DependencyService.Register<IAlertService, AlertService>();
-            
-            
         }
 
         public App(string dbPath) : this()

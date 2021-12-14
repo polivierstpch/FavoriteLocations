@@ -1,32 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FavoriteLocations.ViewModels;assembly=FavoriteLocations"
              x:Class="FavoriteLocations.LoginView"
              NavigationPage.HasNavigationBar="False">
-       
-       <ContentPage.BindingContext>
-              <vm:LoginViewModel />
-       </ContentPage.BindingContext>
-       
-       <StackLayout>
-               <Label Text="Lieux Préférés"
-                      Style="{StaticResource Title}"/>
-               <Label Text="Adresse courriel"
-                      Style="{StaticResource EntryLabel}" />
-               <Entry Placeholder="nom@domaine.com" 
-                      Keyboard="Email"
-                      Text="{Binding Email, Mode=TwoWay}"/>
-               <Label Text="Mot de passe"
-                      Style="{StaticResource EntryLabel}" />
-               <Entry Placeholder="nom@domaine.com" 
-                      IsPassword="True" 
-                      Text="{Binding Password, Mode=TwoWay}"/>
-               <Button Text="Se connecter" 
-                       Command="{Binding LoginCommand}"/>
-               <Button Text="Nouveau compte" 
-                       Style="{StaticResource InversedButton}"
-                       Command="{Binding GoToCreateAccountCommand}"/>
-       </StackLayout>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:LoginViewModel x:Key="Vm" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout BindingContext="{StaticResource Vm}">
+            <Label Text="Lieux Préférés"
+                   Style="{StaticResource Title}" />
+            <Label Text="Adresse courriel"
+                   Style="{StaticResource EntryLabel}" />
+            <Entry Placeholder="nom@domaine.com"
+                   Keyboard="Email"
+                   Text="{Binding Email, Mode=TwoWay}" />
+            <Label Text="Mot de passe"
+                   Style="{StaticResource EntryLabel}" />
+            <Entry Placeholder="nom@domaine.com"
+                   IsPassword="True"
+                   Text="{Binding Password, Mode=TwoWay}" />
+            <Button Text="Se connecter"
+                    Command="{Binding LoginCommand}" />
+            <Button Text="Nouveau compte"
+                    Style="{StaticResource InvertedButton}"
+                    Command="{Binding GoToCreateAccountCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
 
 </ContentPage>

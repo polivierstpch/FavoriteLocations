@@ -10,28 +10,44 @@ namespace FavoriteLocations.ViewModels
         private readonly IAlertService _alertService;
 
         private string _email;
+
         public string Email
         {
             get => _email;
-            set => SetProperty(ref _email, value);
+            set
+            {
+                SetProperty(ref _email, value);
+                (LoginCommand as Command).ChangeCanExecute();
+            }
         }
 
         private string _password;
+
         public string Password
         {
             get => _password;
-            set => SetProperty(ref _password, value);
+            set
+            {
+                SetProperty(ref _password, value);
+                (LoginCommand as Command).ChangeCanExecute();
+            }
         }
-        
+
         public ICommand LoginCommand { get; }
         public ICommand GoToCreateAccountCommand { get; }
 
         public LoginViewModel()
         {
             _alertService = DependencyService.Resolve<IAlertService>();
-            
-            LoginCommand = new Command(TryLogin);
-            GoToCreateAccountCommand = new Command(() => App.Current.MainPage.Navigation.PushAsync(new CreateAccountView()));
+
+            LoginCommand = new Command(TryLogin, EntriesAreValid);
+            GoToCreateAccountCommand =
+                new Command(() => App.Current.MainPage.Navigation.PushAsync(new CreateAccountView()));
+        }
+
+        private bool EntriesAreValid()
+        {
+            return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
         }
 
         private async void TryLogin()
@@ -47,5 +63,5 @@ namespace FavoriteLocations.ViewModels
             }
         }
     }
-    
 }
+    
