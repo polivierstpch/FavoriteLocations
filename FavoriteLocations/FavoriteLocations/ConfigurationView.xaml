@@ -1,14 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FavoriteLocations.ConfigurationView">
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <Label Style="{StaticResource Subtitle}"
+                    Text="Configurations" />
+            <Grid Style="{StaticResource ConfigGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" 
+                       Grid.Row="0"
+                       Style="{StaticResource ConfigLabel}"
+                       Text="Lieux visités" />
+                <Switch Grid.Column="1" 
+                        Grid.Row="0"/>
+                
+                <Label Grid.Column="0"
+                       Grid.Row="1"
+                       Style="{StaticResource ConfigLabel}"
+                       Text="Lieux souhaités" />
+                <Switch Grid.Column="1" 
+                        Grid.Row="1"/>
+                
+                <Label Grid.Column="0" 
+                       Grid.Row="2"
+                       Style="{StaticResource ConfigLabel}"
+                       Text="Lieux connus" />
+                <Switch Grid.Column="1" 
+                        Grid.Row="2"/>
+            </Grid>
+            <Label Style="{StaticResource Subtitle}"
+                   Text="Degrés de localisation de carte" />
+            <Label Style="{StaticResource ConfigLabel}" 
+                   Text="Latitude"/>
+            <Entry Placeholder="Latitude" Keyboard="Numeric"/>
+            <Label Style="{StaticResource ConfigLabel}" 
+                   Text="Longitude"/>
+            <Entry Placeholder="Longitude" Keyboard="Numeric"/>
         </StackLayout>
     </ContentPage.Content>
     

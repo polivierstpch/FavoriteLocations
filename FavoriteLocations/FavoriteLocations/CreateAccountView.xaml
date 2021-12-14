@@ -23,7 +23,7 @@
                    Text="{Binding Email, Mode=TwoWay}" />
             <Label Text="Mot de passe"
                    Style="{StaticResource EntryLabel}" />
-            <Entry Placeholder="nom@domaine.com"
+            <Entry Placeholder="Mot de passe"
                    IsPassword="True"
                    Text="{Binding Password, Mode=TwoWay}" />
             <Button Text="Enregistrer"

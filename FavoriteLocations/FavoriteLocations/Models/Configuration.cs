@@ -4,7 +4,7 @@ namespace FavoriteLocations.Models
 {
     public class Configuration
     {
-        [PrimaryKey] 
+        [PrimaryKey, AutoIncrement] 
         public int Id { get; set; }
         
         public string UserIdentifier { get; set; }

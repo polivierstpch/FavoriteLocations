@@ -47,5 +47,6 @@ namespace FavoriteLocations
         {
             // Handle when your app resumes
         }
+        
     }
 }

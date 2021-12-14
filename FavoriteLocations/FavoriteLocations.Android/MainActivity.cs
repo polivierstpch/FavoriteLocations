@@ -22,6 +22,7 @@ namespace FavoriteLocations.Android
             
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
 
             var dbFileName = "favorite_locations.db";
             var directory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
