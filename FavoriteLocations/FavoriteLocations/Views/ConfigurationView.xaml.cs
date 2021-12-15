@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace FavoriteLocations
+namespace FavoriteLocations.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddFavoriteLocationView : ContentPage
+    public partial class ConfigurationView : ContentPage
     {
-        public AddFavoriteLocationView()
+        public ConfigurationView()
         {
             InitializeComponent();
         }

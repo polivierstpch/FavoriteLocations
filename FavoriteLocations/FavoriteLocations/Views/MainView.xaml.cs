@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace FavoriteLocations
+namespace FavoriteLocations.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainView : TabbedPage

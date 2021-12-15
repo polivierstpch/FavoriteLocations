@@ -3,7 +3,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FavoriteLocations.ViewModels;assembly=FavoriteLocations"
-             x:Class="FavoriteLocations.FavoriteLocationsView">
+             x:Class="FavoriteLocations.Views.FavoriteLocationsView"
+             Title="Lieux Préférés">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -40,12 +41,14 @@
             <Button
                 Style="{StaticResource InvertedButton}"
                 Text="Voir sur la carte"
-                Command="{Binding GoToLocationOnMapCommand}">
+                Command="{Binding GoToLocationOnMapCommand}"
+                CommandParameter="{Binding SelectedLocation}">
             </Button>
             <Button
                 Style="{StaticResource InvertedButton}"
                 Text="Modifier"
-                Command="{Binding ModifyLocationCommand}" />
+                Command="{Binding ModifyLocationCommand}"
+                CommandParameter="{Binding SelectedLocation}"/>
         </StackLayout>
     </ContentPage.Content>
 

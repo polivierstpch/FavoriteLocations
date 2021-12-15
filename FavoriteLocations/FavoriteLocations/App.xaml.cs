@@ -1,5 +1,6 @@
 ﻿using FavoriteLocations.Models;
 using FavoriteLocations.Services;
+using FavoriteLocations.Views;
 using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FavoriteLocations.ViewModels;assembly=FavoriteLocations"
-             x:Class="FavoriteLocations.AddFavoriteLocationView">
+             x:Class="FavoriteLocations.Views.AddFavoriteLocationView">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -18,7 +18,7 @@
     <ContentPage.Content>
         <StackLayout BindingContext="{StaticResource Vm}">
             <Label Style="{StaticResource AddTitle}"
-                   Text="Nouveau Lieu" />
+                   Text="{Binding Title}" />
             <Label Style="{StaticResource EntryLabel}"
                    Text="Nom" />
             <Entry Placeholder="Nom"

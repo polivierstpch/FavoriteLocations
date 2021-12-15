@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using FavoriteLocations.Models;
 using FavoriteLocations.Services;
+using FavoriteLocations.Views;
 using SQLite;
 using Xamarin.Forms;
 
@@ -13,11 +14,8 @@ namespace FavoriteLocations.ViewModels
         public FavoriteLocation SelectedLocation
         {
             get => _selectedLocation;
-            set
-            {
-                SetProperty(ref _selectedLocation, value);
-                RefreshCanExecute();
-            }
+            set => SetProperty(ref _selectedLocation, value);
+            
         }
         
         public ObservableCollection<FavoriteLocation> Locations { get; set; }
@@ -28,8 +26,10 @@ namespace FavoriteLocations.ViewModels
 
         public FavoriteLocationsViewModel()
         {
-            ModifyLocationCommand = new Command(() => { }, LocationWasSelected);
-            GoToLocationOnMapCommand = new Command(() => { }, LocationWasSelected);
+            ModifyLocationCommand = new Command<FavoriteLocation>(location => 
+                App.Current.MainPage.Navigation.PushAsync(new AddFavoriteLocationView(location)),
+                LocationWasSelected);
+            GoToLocationOnMapCommand = new Command<FavoriteLocation>(NavigateToMapView, LocationWasSelected);
             GoToAddLocationCommand = new Command(() =>
                 App.Current.MainPage.Navigation.PushAsync(new AddFavoriteLocationView()));
 
@@ -50,13 +50,20 @@ namespace FavoriteLocations.ViewModels
                 userLocations.ForEach(fl => Locations.Add(fl));
             }
         }
-        
-        private bool LocationWasSelected() => SelectedLocation != null;
-        
-        private void RefreshCanExecute()
+
+        private void NavigateToMapView(FavoriteLocation location)
         {
-            ModifyLocationCommand.ChangeCanExecute();
-            GoToLocationOnMapCommand.ChangeCanExecute();
+            if (!((App.Current.MainPage as NavigationPage)?.CurrentPage is TabbedPage tabbedPage)) 
+                return;
+            
+            if (!(tabbedPage.Children[1] is MapView mapView))
+                return;
+            
+            mapView.Initialize(location);
+            tabbedPage.CurrentPage = tabbedPage.Children[1];
         }
+        
+        private bool LocationWasSelected(FavoriteLocation location) => location != null;
+        
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using FavoriteLocations.Models;
 using FavoriteLocations.Services;
+using FavoriteLocations.Views;
 using SQLite;
 using Xamarin.Forms;
 
@@ -79,10 +80,10 @@ namespace FavoriteLocations.ViewModels
 
             using (var conn = new SQLiteConnection(App.DbPath))
             {
-                var userConfig = conn.Table<Configuration>()
-                    .SingleOrDefault(c => c.UserIdentifier == Auth.UserIdentifier);
+                var exists = conn.Table<Configuration>()
+                    .Count(c => c.UserIdentifier == Auth.UserIdentifier) >= 1;
 
-                if (userConfig == null)
+                if (exists)
                     conn.Insert(defaultConfig);
             }
         }

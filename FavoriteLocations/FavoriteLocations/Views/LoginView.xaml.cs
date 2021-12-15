@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace FavoriteLocations
+namespace FavoriteLocations.Views
 {
     public partial class LoginView : ContentPage
     {
