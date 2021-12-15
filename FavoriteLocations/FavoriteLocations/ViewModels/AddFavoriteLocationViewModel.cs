@@ -119,7 +119,54 @@ namespace FavoriteLocations.ViewModels
             
             await App.Current.MainPage.Navigation.PopAsync();
         }
+        
+        private void PopulateCategoryPickerItems()
+        {
+            var categories = Enum.GetValues(typeof(Category))
+                .Cast<Category>()
+                .ToList();
 
+            foreach (var category in categories)
+            {
+                string displayText;
+                switch (category)
+                {
+                    case Category.Visited:
+                        displayText = "Visité";
+                        break;
+                    case Category.Wished:
+                        displayText = "Souhaité";
+                        break;
+                    case Category.Known:
+                        displayText = "Connu";
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                Categories.Add(PickerItem<Category>.Create(displayText, category));
+            }
+
+            SelectedCategory = Categories.FirstOrDefault();
+        }
+
+        private void RefreshCanExecute()
+        {
+            RegisterCommand.ChangeCanExecute();
+        }
+
+        public void InitializeWithLocation(FavoriteLocation location)
+        {
+            Title = "Modifier Lieu";
+            
+            _locationId = location.Id;
+            Name = location.Name;
+            Address = location.Address;
+            Latitude = location.Latitude;
+            Longitude = location.Longitude;
+            SelectedCategory = Categories.FirstOrDefault(c => c.Value == location.Category);
+        }
+        
         private async Task UpdateLocation(SQLiteConnection conn)
         {
             var exists = conn
@@ -171,53 +218,6 @@ namespace FavoriteLocations.ViewModels
             };
 
             conn.Insert(newLocation);
-        }
-
-        private void PopulateCategoryPickerItems()
-        {
-            var categories = Enum.GetValues(typeof(Category))
-                .Cast<Category>()
-                .ToList();
-
-            foreach (var category in categories)
-            {
-                string displayText;
-                switch (category)
-                {
-                    case Category.Visited:
-                        displayText = "Visité";
-                        break;
-                    case Category.Wished:
-                        displayText = "Souhaité";
-                        break;
-                    case Category.Known:
-                        displayText = "Connu";
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                Categories.Add(PickerItem<Category>.Create(displayText, category));
-            }
-
-            SelectedCategory = Categories.FirstOrDefault();
-        }
-
-        private void RefreshCanExecute()
-        {
-            RegisterCommand.ChangeCanExecute();
-        }
-
-        public void InitializeWithLocation(FavoriteLocation location)
-        {
-            Title = "Modifier Lieu";
-            
-            _locationId = location.Id;
-            Name = location.Name;
-            Address = location.Address;
-            Latitude = location.Latitude;
-            Longitude = location.Longitude;
-            SelectedCategory = Categories.FirstOrDefault(c => c.Value == location.Category);
         }
     }
 }

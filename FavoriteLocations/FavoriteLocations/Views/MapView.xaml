@@ -16,7 +16,7 @@
     
     
     <ContentPage.Content>
-        <maps:Map />
+        <maps:Map x:Name="LocationsMap"/>
     </ContentPage.Content>
     
 </ContentPage>

@@ -59,7 +59,7 @@ namespace FavoriteLocations.ViewModels
             if (!(tabbedPage.Children[1] is MapView mapView))
                 return;
             
-            mapView.Initialize(location);
+            mapView.LoadWithLocation(SelectedLocation);
             tabbedPage.CurrentPage = tabbedPage.Children[1];
         }
         

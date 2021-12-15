@@ -68,23 +68,13 @@ namespace FavoriteLocations.ViewModels
 
         private void CreateDefaultUserConfiguration()
         {
-            var defaultConfig = new Configuration
-            {
-                ShowVisitedLocations = true,
-                ShowKnownLocations = true,
-                ShowWishedLocations = true,
-                LatitudeDegrees = 0.01,
-                LongitudeDegrees = 0.01,
-                UserIdentifier = Auth.UserIdentifier
-            };
-
             using (var conn = new SQLiteConnection(App.DbPath))
             {
                 var exists = conn.Table<Configuration>()
                     .Count(c => c.UserIdentifier == Auth.UserIdentifier) >= 1;
 
-                if (exists)
-                    conn.Insert(defaultConfig);
+                if (!exists)
+                    conn.Insert(App.DefaultConfiguration);
             }
         }
         

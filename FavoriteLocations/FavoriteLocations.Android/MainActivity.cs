@@ -21,6 +21,7 @@ namespace FavoriteLocations.Android
             DependencyService.Register<IAuthService, FirebaseAuthService>();
             
             base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
 
