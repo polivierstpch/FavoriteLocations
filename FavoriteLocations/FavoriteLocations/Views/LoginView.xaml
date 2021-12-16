@@ -26,7 +26,8 @@
                    IsPassword="True"
                    Text="{Binding Password, Mode=TwoWay}" />
             <Button Text="Se connecter"
-                    Command="{Binding LoginCommand}" />
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding IsInfoValid}"/>
             <Button Text="Nouveau compte"
                     Style="{StaticResource InvertedButton}"
                     Command="{Binding GoToCreateAccountCommand}" />

@@ -26,8 +26,7 @@ namespace FavoriteLocations
                 ShowKnownLocations = true,
                 ShowWishedLocations = true,
                 LatitudeDegrees = 0.01,
-                LongitudeDegrees = 0.01,
-                UserIdentifier = Auth.UserIdentifier
+                LongitudeDegrees = 0.01
             };
             
             DependencyService.Register<IAlertService, AlertService>();

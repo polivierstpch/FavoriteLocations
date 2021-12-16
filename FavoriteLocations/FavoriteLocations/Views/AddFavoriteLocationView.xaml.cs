@@ -16,7 +16,7 @@ namespace FavoriteLocations.Views
         public AddFavoriteLocationView(FavoriteLocation location)
         {
             InitializeComponent();
-            (Resources["Vm"] as AddFavoriteLocationViewModel)?.InitializeWithLocation(location);
+            (Resources["Vm"] as AddOrModifyFavoriteLocationViewModel)?.InitializeWithLocation(location);
         }
     }
 }

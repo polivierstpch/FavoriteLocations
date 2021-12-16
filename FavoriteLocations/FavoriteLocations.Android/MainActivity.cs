@@ -5,7 +5,6 @@ using Android.OS;
 using FavoriteLocations.Android.Services;
 using FavoriteLocations.Services;
 using Xamarin.Forms;
-using Environment = System.Environment;
 
 namespace FavoriteLocations.Android
 {
@@ -21,12 +20,12 @@ namespace FavoriteLocations.Android
             DependencyService.Register<IAuthService, FirebaseAuthService>();
             
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
 
-            var dbFileName = "favorite_locations.db";
-            var directory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            const string dbFileName = "favorite_locations.db";
+            var directory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var fullPath = Path.Combine(directory, dbFileName);
             
             LoadApplication(new App(fullPath));

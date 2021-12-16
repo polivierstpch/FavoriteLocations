@@ -16,7 +16,8 @@
     
     
     <ContentPage.Content>
-        <maps:Map x:Name="LocationsMap"/>
+        <maps:Map x:Name="LocationsMap"
+                  IsShowingUser="True"/>
     </ContentPage.Content>
     
 </ContentPage>

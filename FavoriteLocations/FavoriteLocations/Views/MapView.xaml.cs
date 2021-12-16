@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FavoriteLocations.Models;
 using FavoriteLocations.Services;
 using Plugin.Geolocator;
@@ -25,6 +26,8 @@ namespace FavoriteLocations.Views
             InitializeComponent();
             LoadConfiguration();
             GetLocation();
+
+            _locator.PositionChanged += LocatorPositionChanged;
         }
 
         public void LoadWithLocation(FavoriteLocation location)
@@ -35,12 +38,9 @@ namespace FavoriteLocations.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            
-            LocationsMap.Pins.Clear();
-            
+
             StartLocalization();
             LoadConfiguration();
-            
             LoadFavoriteLocationsOnMap();
         }
 
@@ -55,12 +55,14 @@ namespace FavoriteLocations.Views
 
         private void LoadFavoriteLocationsOnMap()
         {
+            LocationsMap.Pins.Clear();
+            
             if (_selectedLocation != null)
             {
                 LoadSelectedLocationOnMap();
                 return;
             }
-
+            
             var locations = new List<FavoriteLocation>();
 
             using (var conn = new SQLiteConnection(App.DbPath))
@@ -83,7 +85,8 @@ namespace FavoriteLocations.Views
                 {
                 }
             }
-
+            
+            GetLocation();
         }
 
         private void LoadSelectedLocationOnMap()
@@ -162,12 +165,13 @@ namespace FavoriteLocations.Views
         
         private void LocatorPositionChanged(object sender, PositionEventArgs e)
         {
-            CenterMapToLocation(e.Position.Latitude, e.Position.Longitude);
+            if (_selectedLocation == null)
+                CenterMapToLocation(e.Position.Latitude, e.Position.Longitude);
         }
         
         private async void StartLocalization()
         {
-            await _locator.StartListeningAsync(new TimeSpan(0, 0, 5), 50);
+            await _locator.StartListeningAsync(new TimeSpan(0, 0, 20), 100);
         }
 
         private async void StopLocalization()

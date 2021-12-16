@@ -23,17 +23,17 @@ namespace FavoriteLocations.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            DependencyService.Register<IAuthService, FirebaseAuthService>();
+            
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
             Firebase.Core.App.Configure();
             
-            var dbFileName = "favorite_locations.db";
+            const string dbFileName = "favorite_locations.db";
             var directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..",
                 "Library");
             var fullPath = Path.Combine(directory, dbFileName);
-                
-            DependencyService.Register<IAuthService, FirebaseAuthService>();
-                
+            
             LoadApplication(new App(fullPath));
 
             return base.FinishedLaunching(app, options);

@@ -3,10 +3,8 @@
 namespace FavoriteLocations.Models
 {
     public class Configuration
-    {
-        [PrimaryKey, AutoIncrement] 
-        public int Id { get; set; }
-        
+    {   
+        [PrimaryKey]
         public string UserIdentifier { get; set; }
         
         public bool ShowKnownLocations { get; set; }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using FavoriteLocations.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +10,12 @@ namespace FavoriteLocations.Views
         public ConfigurationView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            (Resources["Vm"] as ConfigurationViewModel)?.UpdateConfiguration();
         }
     }
 }

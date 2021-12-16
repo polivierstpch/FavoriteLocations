@@ -13,15 +13,26 @@ namespace FavoriteLocations.ViewModels
         public string Email
         {
             get => _email;
-            set => SetProperty(ref _email, value);
+            set
+            {
+                SetProperty(ref _email, value);
+                RaisePropertyChanged(nameof(IsInfoValid));
+            }
         }
 
         private string _password;
         public string Password
         {
             get => _password;
-            set => SetProperty(ref _password, value);
+            set
+            {
+                SetProperty(ref _password, value);
+                RaisePropertyChanged(nameof(IsInfoValid));
+            }
         }
+
+        public bool IsInfoValid => !string.IsNullOrEmpty(Email)
+                                   && !string.IsNullOrEmpty(Password);
         
         public ICommand CreateAccountCommand { get; }
         public ICommand GoBackToLoginCommand { get; }
@@ -30,28 +41,11 @@ namespace FavoriteLocations.ViewModels
         {
             _alertService = DependencyService.Resolve<IAlertService>();
 
-            CreateAccountCommand = new Command(TryCreateAccount);
+            CreateAccountCommand = new Command<bool>(TryCreateAccount, ValidateUserInfo);
             GoBackToLoginCommand = new Command(ConfirmLeaveCreateAccount);
         }
 
-        private bool ValidateUserInfo(out string message)
-        {
-            if (string.IsNullOrEmpty(Email))
-            {
-                message = "Veuillez entrer une adresse email valide.";
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(Password))
-            {
-                message = "Veuillez entrer un mot de passe avec au moins 1 caractère";
-                return false;
-            }
-
-            message = string.Empty;
-            return true;
-        }
-
+        private bool ValidateUserInfo(bool infoIsValid) => infoIsValid;
 
         private async void ConfirmLeaveCreateAccount()
         {
@@ -64,15 +58,15 @@ namespace FavoriteLocations.ViewModels
             if (confirmLeave)
                 await App.Current.MainPage.Navigation.PopAsync();
         }
-        
-        private async void TryCreateAccount()
+
+        private async void TryCreateAccount(bool infoIsValid)
         {
-            if (!ValidateUserInfo(out var message))
+            if (!infoIsValid)
             {
-                await _alertService.ShowAsync("Erreur", message, "Fermer");
+                await _alertService.ShowAsync("Erreur", "Veuillez vous assurez que les champs ne sont pas vides.", "Fermer");
                 return;
             }
-            
+
             try
             {
                 await Auth.CreateUser(Email, Password);

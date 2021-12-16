@@ -6,7 +6,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <vm:AddFavoriteLocationViewModel x:Key="Vm" />
+            <vm:AddOrModifyFavoriteLocationViewModel x:Key="Vm" />
             <Style TargetType="Label"
                    BasedOn="{StaticResource Title}"
                    x:Key="AddTitle">
@@ -62,7 +62,8 @@
             <Label Style="{StaticResource InfoLabel}"
                    Text="* Entrez des valeurs entre -90 et 90 pour les coordonnées." />
             <Button Text="Enregistrer"
-                    Command="{Binding RegisterCommand}" />
+                    Command="{Binding RegisterCommand}" 
+                    CommandParameter="{Binding IsLocationValid}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using FavoriteLocations.Models;
 using FavoriteLocations.Services;
 using FavoriteLocations.Views;
@@ -21,7 +20,7 @@ namespace FavoriteLocations.ViewModels
             set
             {
                 SetProperty(ref _email, value);
-                RefreshCanExecute();
+                RaisePropertyChanged(nameof(IsInfoValid));
             }
         }
         
@@ -31,9 +30,12 @@ namespace FavoriteLocations.ViewModels
             set
             {
                 SetProperty(ref _password, value);
-                RefreshCanExecute();
+                RaisePropertyChanged(nameof(IsInfoValid));
             }
         }
+        
+        public bool IsInfoValid => !string.IsNullOrEmpty(Email) 
+                                   && !string.IsNullOrEmpty(Password);
 
         public Command LoginCommand { get; }
         public Command GoToCreateAccountCommand { get; }
@@ -42,18 +44,22 @@ namespace FavoriteLocations.ViewModels
         {
             _alertService = DependencyService.Resolve<IAlertService>();
 
-            LoginCommand = new Command(TryLogin, EntriesAreValid);
-            GoToCreateAccountCommand =
-                new Command(() => App.Current.MainPage.Navigation.PushAsync(new CreateAccountView()));
+            LoginCommand = new Command<bool>(TryLogin, EntriesAreValid);
+            GoToCreateAccountCommand = new Command(
+                () => App.Current.MainPage.Navigation.PushAsync(new CreateAccountView()));
         }
 
-        private bool EntriesAreValid()
-        {
-            return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
-        }
+        private bool EntriesAreValid(bool isInfoValid) => isInfoValid;
 
-        private async void TryLogin()
+        private async void TryLogin(bool isInfoValid)
         {
+            if (!isInfoValid)
+            {
+                await _alertService.ShowAsync("Erreur", "Veuillez vous assurez que les champs ne sont pas vides.",
+                    "Fermer");
+                return;
+            }
+            
             try
             {
                 await Auth.LoginUser(Email, Password);
@@ -71,16 +77,14 @@ namespace FavoriteLocations.ViewModels
             using (var conn = new SQLiteConnection(App.DbPath))
             {
                 var exists = conn.Table<Configuration>()
-                    .Count(c => c.UserIdentifier == Auth.UserIdentifier) >= 1;
+                    .Count(c => c.UserIdentifier == Auth.UserIdentifier) == 1;
 
                 if (!exists)
+                {
+                    App.DefaultConfiguration.UserIdentifier = Auth.UserIdentifier;
                     conn.Insert(App.DefaultConfiguration);
+                }
             }
-        }
-        
-        private void RefreshCanExecute()
-        {
-            LoginCommand.ChangeCanExecute();
         }
     }
 }

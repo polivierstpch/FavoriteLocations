@@ -20,14 +20,15 @@
                    Style="{StaticResource EntryLabel}" />
             <Entry Placeholder="nom@domaine.com"
                    Keyboard="Email"
-                   Text="{Binding Email, Mode=TwoWay}" />
+                   Text="{Binding Email}" />
             <Label Text="Mot de passe"
                    Style="{StaticResource EntryLabel}" />
             <Entry Placeholder="Mot de passe"
                    IsPassword="True"
-                   Text="{Binding Password, Mode=TwoWay}" />
+                   Text="{Binding Password}" />
             <Button Text="Enregistrer"
-                    Command="{Binding CreateAccountCommand}" />
+                    Command="{Binding CreateAccountCommand}"
+                    CommandParameter="{Binding IsInfoValid}"/>
             <Button Text="Annuler"
                     Style="{StaticResource InvertedButton}"
                     Command="{Binding GoBackToLoginCommand}" />
